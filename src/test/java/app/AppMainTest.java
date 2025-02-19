@@ -1,10 +1,10 @@
-package com.example.projetoValendo;
+package app;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class ProjetoValendoApplicationTests {
+class AppMainTest {
 
 	@Test
 	void contextLoads() {
