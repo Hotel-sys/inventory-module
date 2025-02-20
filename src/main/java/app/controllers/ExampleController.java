@@ -18,7 +18,7 @@ import jakarta.persistence.EntityNotFoundException;
 
 @RestController
 @RequestMapping("/api/example")
-public class ExampleController implements IController<Example, Long> {
+public class ExampleController implements IController<Example, String> {
 
 	@Autowired
 	ExampleService exampleService;
@@ -38,7 +38,7 @@ public class ExampleController implements IController<Example, Long> {
 
 	@Override
 	@GetMapping("/{id}")
-	public ResponseEntity<Example> getById(@PathVariable Long id) {
+	public ResponseEntity<Example> getById(@PathVariable String id) {
 		try {
 			Example result = exampleService.findById(id);
 			
@@ -67,19 +67,19 @@ public class ExampleController implements IController<Example, Long> {
 	}
 
 	@Override
-	public ResponseEntity<Example> update(Long id, Example entity) {
+	public ResponseEntity<Example> update(String id, Example entity) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public ResponseEntity<Void> delete(Long id) {
+	public ResponseEntity<Void> delete(String id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public ResponseEntity<Void> deleteAll(List<Long> ids) {
+	public ResponseEntity<Void> deleteAll(List<String> ids) {
 		// TODO Auto-generated method stub
 		return null;
 	}

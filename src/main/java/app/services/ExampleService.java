@@ -12,7 +12,7 @@ import app.repositories.ExampleRepository;
 import jakarta.persistence.EntityNotFoundException;
 
 @Service
-public class ExampleService implements IService<Example, Long> {
+public class ExampleService implements IService<Example, String> {
 	
 	@Autowired
 	ExampleRepository exampleRepository;
@@ -30,7 +30,7 @@ public class ExampleService implements IService<Example, Long> {
 	}
 
 	@Override
-	public Example findById(Long id) throws EntityNotFoundException {
+	public Example findById(String id) throws EntityNotFoundException {
 		return exampleRepository
 				.findById(id)
 				.orElseThrow(() -> new EntityNotFoundException());
@@ -48,25 +48,25 @@ public class ExampleService implements IService<Example, Long> {
 	}
 
 	@Override
-	public boolean existsById(Long id) {
+	public boolean existsById(String id) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	public Example update(Long id, Example entity) {
+	public Example update(String id, Example entity) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public void delete(Long id) {
+	public void delete(String id) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void deleteAll(List<Long> ids) {
+	public void deleteAll(List<String> ids) {
 		// TODO Auto-generated method stub
 		
 	}
