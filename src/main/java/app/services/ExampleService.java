@@ -19,28 +19,26 @@ public class ExampleService implements IService<Example, Long> {
 
 	@Override
 	public Example save(Example entity) {
-		Example newEntity = this.exampleRepository.save(entity);
+		Example newEntity = exampleRepository.save(entity);
 		
 		return newEntity;
 	}
 
 	@Override
 	public List<Example> saveAll(List<Example> entities) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public Example findById(Long id) throws EntityNotFoundException {
-		return this.exampleRepository
+		return exampleRepository
 				.findById(id)
 				.orElseThrow(() -> new EntityNotFoundException());
 	}
 
 	@Override
 	public List<Example> findAll() {
-		// TODO Auto-generated method stub
-		return this.exampleRepository.findAll();
+		return exampleRepository.findAll();
 	}
 
 	@Override

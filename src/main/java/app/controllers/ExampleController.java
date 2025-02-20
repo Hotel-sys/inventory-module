@@ -27,8 +27,8 @@ public class ExampleController implements IController<Example, Long> {
 	@PostMapping()
 	public ResponseEntity<Example> create(@RequestBody Example example) {
 		try {
-			Example result = this.exampleService.save(example);
-			
+			Example result = exampleService.save(example);			
+		
 			return ResponseEntity.created(null).body(result);
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
@@ -40,7 +40,7 @@ public class ExampleController implements IController<Example, Long> {
 	@GetMapping("/{id}")
 	public ResponseEntity<Example> getById(@PathVariable Long id) {
 		try {
-			Example result = this.exampleService.findById(id);
+			Example result = exampleService.findById(id);
 			
 			return ResponseEntity.ok(result);
 		} catch (EntityNotFoundException en) {
@@ -51,9 +51,13 @@ public class ExampleController implements IController<Example, Long> {
 	}
 
 	@Override
+	@GetMapping()
 	public ResponseEntity<List<Example>> getAll() {
-		// TODO Auto-generated method stub
-		return null;
+		try {
+			return ResponseEntity.ok(exampleService.findAll());
+		} catch (Exception e) {
+			return ResponseEntity.badRequest().build();
+		}
 	}
 
 	@Override
