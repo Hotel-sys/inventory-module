@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
-public interface IController<T, ID> {
+public interface IController<T> {
 
     /**
      * Creates a new entity.
@@ -18,11 +18,11 @@ public interface IController<T, ID> {
     ResponseEntity<T> create(@RequestBody T entity);
 
     /**
-     * Retrieves an entity by its ID.
-     * @param id The ID of the entity.
+     * Retrieves an entity by its String.
+     * @param id The String of the entity.
      * @return ResponseEntity with the entity if found.
      */
-    ResponseEntity<T> getById(@PathVariable ID id);
+    ResponseEntity<T> getById(@PathVariable String id);
 
     /**
      * Retrieves all entities.
@@ -41,23 +41,23 @@ public interface IController<T, ID> {
 
     /**
      * Updates an existing entity.
-     * @param id The ID of the entity to update.
+     * @param id The String of the entity to update.
      * @param entity The updated entity.
      * @return ResponseEntity with the updated entity.
      */
-    ResponseEntity<T> update(@PathVariable ID id, @RequestBody T entity);
+    ResponseEntity<T> update(@PathVariable String id, @RequestBody T entity);
 
     /**
-     * Deletes an entity by its ID.
-     * @param id The ID of the entity to delete.
+     * Deletes an entity by its String.
+     * @param id The String of the entity to delete.
      * @return ResponseEntity with a success message.
      */
-    ResponseEntity<Void> delete(@PathVariable ID id);
+    ResponseEntity<Void> delete(@PathVariable String id);
 
     /**
      * Deletes multiple entities by their IDs.
      * @param ids A list of IDs to delete.
      * @return ResponseEntity with a success message.
      */
-    ResponseEntity<Void> deleteAll(@RequestBody List<ID> ids);
+    ResponseEntity<Void> deleteAll(@RequestBody List<String> ids);
 }

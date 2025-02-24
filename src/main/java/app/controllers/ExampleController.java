@@ -18,7 +18,7 @@ import jakarta.persistence.EntityNotFoundException;
 
 @RestController
 @RequestMapping("/api/example")
-public class ExampleController implements IController<Example, String> {
+public class ExampleController implements IController<Example> {
 
 	@Autowired
 	ExampleService exampleService;
@@ -31,7 +31,9 @@ public class ExampleController implements IController<Example, String> {
 		
 			return ResponseEntity.created(null).body(result);
 		} catch (Exception e) {
+			e.getStackTrace();
 			System.out.println(e.getMessage());
+			System.out.println(e.getCause());
 			return ResponseEntity.badRequest().build();
 		}
 	}

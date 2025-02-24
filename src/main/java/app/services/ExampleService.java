@@ -1,7 +1,6 @@
 package app.services;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,16 +11,16 @@ import app.repositories.ExampleRepository;
 import jakarta.persistence.EntityNotFoundException;
 
 @Service
-public class ExampleService implements IService<Example, String> {
+public class ExampleService implements IService<Example> {
 	
 	@Autowired
 	ExampleRepository exampleRepository;
 
 	@Override
 	public Example save(Example entity) {
-		Example newEntity = exampleRepository.save(entity);
+		Example newEntity = Example.builder().ping(entity.getPing()).build();
 		
-		return newEntity;
+		return exampleRepository.save(newEntity);
 	}
 
 	@Override

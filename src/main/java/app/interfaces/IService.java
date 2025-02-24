@@ -1,9 +1,8 @@
 package app.interfaces;
 
 import java.util.List;
-import java.util.Optional;
 
-public interface IService<T, ID> {
+public interface IService<T> {
 	/**
      * Saves a new entity or updates an existing one.
      * @param entity The entity to save or update.
@@ -23,7 +22,7 @@ public interface IService<T, ID> {
      * @param id The ID of the entity.
      * @return An Optional containing the entity if found, or empty otherwise.
      */
-    T findById(ID id);
+    T findById(String id);
 
     /**
      * Retrieves all entities.
@@ -44,7 +43,7 @@ public interface IService<T, ID> {
      * @param id The ID to check.
      * @return true if the entity exists, false otherwise.
      */
-    boolean existsById(ID id);
+    boolean existsById(String id);
 
     /**
      * Updates an existing entity.
@@ -52,19 +51,19 @@ public interface IService<T, ID> {
      * @param entity The entity with updated data.
      * @return The updated entity.
      */
-    T update(ID id, T entity);
+    T update(String id, T entity);
 
     /**
      * Deletes an entity by its ID.
      * @param id The ID of the entity to delete.
      */
-    void delete(ID id);
+    void delete(String id);
 
     /**
      * Deletes multiple entities by their IDs.
      * @param ids A list of IDs to delete.
      */
-    void deleteAll(List<ID> ids);
+    void deleteAll(List<String> ids);
 
     /**
      * Deletes all entities.
