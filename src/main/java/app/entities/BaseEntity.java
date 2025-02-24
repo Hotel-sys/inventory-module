@@ -23,7 +23,6 @@ public abstract class BaseEntity implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 
-
 	@Id
 	@UuidGenerator
 	private String id;

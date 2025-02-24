@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import app.entities.Example;
 import app.interfaces.IService;
+import app.lib.notifications.SmsNotifier;
 import app.repositories.ExampleRepository;
 import jakarta.persistence.EntityNotFoundException;
 
@@ -15,10 +16,18 @@ public class ExampleService implements IService<Example> {
 	
 	@Autowired
 	ExampleRepository exampleRepository;
+	
+	SmsNotifier smsNotifier;
+	
+	public ExampleService() {
+		smsNotifier = new SmsNotifier();
+	}
 
 	@Override
 	public Example save(Example entity) {
 		Example newEntity = Example.builder().ping(entity.getPing()).build();
+		
+		smsNotifier.notifyTest(newEntity);
 		
 		return exampleRepository.save(newEntity);
 	}
