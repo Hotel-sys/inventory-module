@@ -1,7 +1,9 @@
 package app.entities;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
@@ -16,6 +18,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 @EqualsAndHashCode(callSuper = false)
+@Table(name="user_tb")
 public class User extends BaseEntity{
 	
 	/**
@@ -30,5 +33,10 @@ public class User extends BaseEntity{
 	private String email;
 	
 	@ManyToOne
+	@JoinColumn(name = "department_id")
 	private Department department;
+	
+	@ManyToOne
+	@JoinColumn(name = "company_id")
+	private Company company;
 }

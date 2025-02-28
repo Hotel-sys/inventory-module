@@ -56,9 +56,9 @@ public class Company extends BaseEntity{
 	private String website;
 	
 	@Nullable
-	private String notes;
+	private String notes;	
 	
-	@OneToMany
+	@OneToMany(mappedBy = "company")
 	private List<User> user;
 	
 }

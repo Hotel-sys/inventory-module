@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import app.entities.User;
 import app.interfaces.IService;
 import app.repositories.UserRepository;
+import jakarta.persistence.EntityNotFoundException;
 
 @Service
 public class UserService implements IService<User>{
@@ -17,8 +18,7 @@ public class UserService implements IService<User>{
 
 	@Override
 	public User save(User entity) {
-		// TODO Auto-generated method stub
-		return null;
+		return this.userRepository.save(entity);
 	}
 
 	@Override
@@ -28,15 +28,14 @@ public class UserService implements IService<User>{
 	}
 
 	@Override
-	public User findById(String id) {
-		// TODO Auto-generated method stub
-		return null;
+	public User findById(String id) throws EntityNotFoundException{
+		return this.userRepository.findById(id)
+				.orElseThrow(() -> new EntityNotFoundException());
 	}
 
 	@Override
 	public List<User> findAll() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.userRepository.findAll();
 	}
 
 	@Override
@@ -53,14 +52,18 @@ public class UserService implements IService<User>{
 
 	@Override
 	public User update(String id, User entity) {
-		// TODO Auto-generated method stub
-		return null;
+		this.userRepository.findById(id).orElseThrow(() -> new EntityNotFoundException());
+		
+		return userRepository.save(entity);
 	}
 
 	@Override
 	public void delete(String id) {
-		// TODO Auto-generated method stub
-		
+		this.userRepository.findById(id)
+			.ifPresentOrElse(
+					(user) -> this.userRepository.deleteById(id), 
+					() -> new EntityNotFoundException()
+			);
 	}
 
 	@Override

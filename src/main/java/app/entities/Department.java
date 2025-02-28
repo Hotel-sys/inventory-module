@@ -30,6 +30,6 @@ public class Department extends BaseEntity{
 	@NotNull
 	private String description;	
 	
-	@OneToMany
+	@OneToMany(mappedBy = "department")
 	private List<User> user;
 }

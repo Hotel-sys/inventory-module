@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import app.entities.Company;
 import app.interfaces.IService;
 import app.repositories.CompanyRepository;
+import jakarta.persistence.EntityNotFoundException;
 
 @Service
 public class CompanyService implements IService<Company>{
@@ -17,8 +18,7 @@ public class CompanyService implements IService<Company>{
 
 	@Override
 	public Company save(Company entity) {
-		// TODO Auto-generated method stub
-		return null;
+		return this.companyRepository.save(entity);
 	}
 
 	@Override
@@ -29,14 +29,13 @@ public class CompanyService implements IService<Company>{
 
 	@Override
 	public Company findById(String id) {
-		// TODO Auto-generated method stub
-		return null;
+		return this.companyRepository.findById(id)
+				.orElseThrow(() -> new EntityNotFoundException());
 	}
 
 	@Override
 	public List<Company> findAll() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.companyRepository.findAll();
 	}
 
 	@Override
@@ -53,14 +52,16 @@ public class CompanyService implements IService<Company>{
 
 	@Override
 	public Company update(String id, Company entity) {
-		// TODO Auto-generated method stub
-		return null;
+		this.companyRepository.findById(id).orElseThrow(() -> new EntityNotFoundException());
+		
+		return this.companyRepository.save(entity);
 	}
 
 	@Override
 	public void delete(String id) {
-		// TODO Auto-generated method stub
-		
+		this.companyRepository.findById(id).ifPresentOrElse(
+				(c) -> this.companyRepository.deleteById(id), 
+				() ->  new EntityNotFoundException());		
 	}
 
 	@Override
