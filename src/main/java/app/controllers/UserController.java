@@ -28,7 +28,7 @@ public class UserController implements IController<User>{
 	private UserService userService;
 
 	@Override
-	@PostMapping("/create")
+	@PostMapping()
 	public ResponseEntity<User> create(@RequestBody User entity) {
 		try {
 			User u = this.userService.save(entity);

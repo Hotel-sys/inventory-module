@@ -1,7 +1,10 @@
 package app.entities;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import io.micrometer.common.lang.Nullable;
 import jakarta.persistence.Entity;
@@ -28,29 +31,30 @@ public class Company extends BaseEntity{
 	 */
 	private static final long serialVersionUID = 1L;
 
-	@NotNull
+	@NotBlank(message="Company's name is required!")
 	private String name;	
 	
-	@NotNull
+	@NotBlank(message="Company's address is required!")
 	private String address;
 	
-	@NotNull
+	@NotBlank(message="Company's contact_info is required!")
 	private String contact_info;
 	
-	@NotNull
+	@NotBlank(message="Company's phone is required!")
 	private String phone;
 	
 	@Pattern(regexp = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$", message = "Email no formato algumacoisa@algumacoisa.algumacoisa.")
 	private String email;
 	
-	@Nullable
+	@NotBlank(message="Company's industry is required!")
 	private String industry;
 	
-	@NotBlank
+	@NotBlank(message="Company's registration_number is required!")
 	private String registration_number;	
 	
-	@NotBlank
-	private LocalDateTime established_date;
+	@JsonFormat(pattern = "yyyy-MM-dd")
+	@NotNull
+	private LocalDate established_date;
 	
 	@Nullable
 	private String website;
