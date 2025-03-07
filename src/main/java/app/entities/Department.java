@@ -1,8 +1,11 @@
 package app.entities;
 
+import java.util.List;
+
 import jakarta.persistence.Entity;
+import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.NotBlank;
-import lombok.AccessLevel;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -15,10 +18,19 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 @EqualsAndHashCode(callSuper = false)
-public class Example extends BaseEntity {
+public class Department extends BaseEntity{
 
+	/**
+	 * 
+	 */
 	private static final long serialVersionUID = 1L;
-	@NotBlank
-	private String ping;	
+
+	@NotBlank(message="Department's name is required!")
+	private String name;
 	
+	@NotBlank(message="Department's description is required!")
+	private String description;	
+	
+	@OneToMany(mappedBy = "department")
+	private List<User> user;
 }
