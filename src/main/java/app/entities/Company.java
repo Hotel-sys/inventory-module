@@ -63,6 +63,9 @@ public class Company extends BaseEntity{
 	private String notes;	
 	
 	@OneToMany(mappedBy = "company")
-	private List<User> user;
+	private List<User> users;
+	
+//	@OneToMany(mappedBy = "stockItem")
+//	private List<StockItem> stockItems;
 	
 }
