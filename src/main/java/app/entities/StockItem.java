@@ -27,7 +27,7 @@ public class StockItem extends BaseEntity {
 	@NotBlank
 	private String name;
 	
-	@Nullable
+	@NotBlank
 	private String description;
 	
 	private int quantity;
@@ -46,5 +46,13 @@ public class StockItem extends BaseEntity {
 	
 	@OneToOne(mappedBy = "stockItem")
 	private StockArchive stockArchive;
+	
+	@ManyToOne
+	@JoinColumn(name = "company_id")
+	private Company company;
+	
+	@ManyToOne
+	@JoinColumn(name = "department_id")
+	private Department department;
 	
 }

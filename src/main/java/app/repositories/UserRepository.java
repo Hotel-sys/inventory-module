@@ -13,6 +13,6 @@ public interface UserRepository extends JpaRepository<User, String> {
 	
 	public List<User> findByEmailContaining(String address);
 	
-	@Query("SELECT u FROM user_tb u WHERE u.department.name = :departmentName")
+	@Query("SELECT u FROM User u WHERE u.department.name = :departmentName")
     List<User> findByDepartmentName(@Param("departmentName") String departmentName);
 }

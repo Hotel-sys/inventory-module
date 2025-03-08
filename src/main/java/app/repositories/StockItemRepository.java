@@ -10,8 +10,8 @@ import app.entities.StockItem;
 @Repository
 public interface StockItemRepository extends JpaRepository<StockItem, String> {
 
-	StockItem findStockItemByName(String name);
+//	StockItem findStockItemByName(String name);
 	
-	List<StockItem> findByStockItemArchivedFalse();
+	List<StockItem> findByArchivedFalse();
 	
 }

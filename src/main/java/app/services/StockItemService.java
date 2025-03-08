@@ -41,7 +41,7 @@ public class StockItemService implements IService<StockItem> {
 
 	@Override
 	public List<StockItem> findAll() {
-		return stockItemRepository.findByStockItemArchivedFalse();
+		return stockItemRepository.findByArchivedFalse();
 	}
 
 	@Override
