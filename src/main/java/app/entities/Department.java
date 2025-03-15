@@ -2,6 +2,8 @@ package app.entities;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.NotBlank;
@@ -31,6 +33,7 @@ public class Department extends BaseEntity{
 	@NotBlank(message="Department's description is required!")
 	private String description;	
 	
+	@JsonIgnoreProperties
 	@OneToMany(mappedBy = "department")
 	private List<User> user;
 }

@@ -4,9 +4,12 @@ import java.time.LocalDateTime;
 
 import org.springframework.data.annotation.CreatedDate;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.annotation.Nullable;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
@@ -39,6 +42,7 @@ public class StockArchive extends BaseEntity {
 	@Nullable
 	private String reason;
 	
-//	@OneToMany
-//	private User user;
+	//@JsonIgnoreProperties
+    //@OneToMany
+	//private User user;
 }

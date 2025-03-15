@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import io.micrometer.common.lang.Nullable;
 import jakarta.persistence.Entity;
@@ -38,7 +39,7 @@ public class Company extends BaseEntity{
 	private String address;
 	
 	@NotBlank(message="Company's contact_info is required!")
-	private String contact_info;
+	private String contactInfo;
 	
 	@NotBlank(message="Company's phone is required!")
 	private String phone;
@@ -50,11 +51,11 @@ public class Company extends BaseEntity{
 	private String industry;
 	
 	@NotBlank(message="Company's registration_number is required!")
-	private String registration_number;	
+	private String registrationNumber;	
 	
 	@JsonFormat(pattern = "yyyy-MM-dd")
 	@NotNull
-	private LocalDate established_date;
+	private LocalDate establishedDate;
 	
 	@Nullable
 	private String website;
@@ -62,6 +63,7 @@ public class Company extends BaseEntity{
 	@Nullable
 	private String notes;	
 	
+	@JsonIgnoreProperties
 	@OneToMany(mappedBy = "company")
 	private List<User> users;
 	

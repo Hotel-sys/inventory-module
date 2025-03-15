@@ -77,5 +77,13 @@ public class DepartmentService implements IService<Department>{
 		// TODO Auto-generated method stub
 		
 	}
+	
+	public List<Department> findByNameStartingWith(String name) {
+		return this.departmentRepository.findByNameStartingWith(name);
+	}
+	
+	public List<Department> findByDescriptionContaining(String address) {
+		return this.departmentRepository.findByDescriptionContaining(address);
+	}
 
 }

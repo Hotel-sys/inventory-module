@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import app.entities.User;
@@ -98,6 +99,30 @@ public class UserController implements IController<User>{
 	public ResponseEntity<Void> deleteAll(List<String> ids) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	
+	@GetMapping("/findByNameStartingWith")
+	public ResponseEntity<List<User>> findByNameStartingWith(@RequestParam String name) {
+		try {
+			this.userService.findByNameStartingWith(name);
+			return ResponseEntity.ok(null);						
+		} catch (EntityNotFoundException e) {
+			return ResponseEntity.notFound().build();
+		} catch (Exception e) {
+			return ResponseEntity.badRequest().build();
+		}
+	}
+	
+	@GetMapping("/findByEmailContaining")
+	public ResponseEntity<List<User>> findByEmailContaining(@RequestParam String email) {
+		try {
+			this.userService.findByEmailContaining(email);
+			return ResponseEntity.ok(null);						
+		} catch (EntityNotFoundException e) {
+			return ResponseEntity.notFound().build();
+		} catch (Exception e) {
+			return ResponseEntity.badRequest().build();
+		}
 	}
 
 }

@@ -75,5 +75,13 @@ public class CompanyService implements IService<Company>{
 		// TODO Auto-generated method stub
 		
 	}
+	
+	public List<Company> findByNameStartingWith(String name) {
+		return this.companyRepository.findByNameStartingWith(name);
+	}
+	
+	public List<Company> findByAddressContaining(String address) {
+		return this.companyRepository.findByAddressContaining(address);
+	}
 
 }

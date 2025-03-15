@@ -2,8 +2,11 @@ package app.entities;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.annotation.Nullable;
 import jakarta.persistence.Entity;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
@@ -28,6 +31,14 @@ public class Category extends BaseEntity {
 	@Nullable
 	private String description;
 	
+	/*
+	@JsonIgnoreProperties
 	@OneToMany(mappedBy = "category")
 	private List<StockItem> stockItems;
+	*/
+	
+	@JsonIgnoreProperties
+    @ManyToMany(mappedBy = "categories") 
+    private List<StockItem> stockItems;
+	
 }

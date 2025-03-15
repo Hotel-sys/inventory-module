@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import app.entities.Company;
@@ -102,5 +103,30 @@ public class DepartmentController implements IController<Department>{
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	@GetMapping("/findByNameStartingWith")
+	public ResponseEntity<Department> findByNameStartingWith(@RequestParam String name) {
+		try {
+			this.departmentService.findByNameStartingWith(name);
+			return ResponseEntity.ok(null);			
+		} catch(EntityNotFoundException e) {
+			return ResponseEntity.notFound().build();
+		} catch (Exception e) {
+			return ResponseEntity.badRequest().build();
+		}
+	}
+	
+	@GetMapping("/findByDescriptionContaining")
+	public ResponseEntity<Department> findByDescriptionContaining(@RequestParam String address) {
+		try {
+			this.departmentService.findByDescriptionContaining(address);
+			return ResponseEntity.ok(null);			
+		} catch(EntityNotFoundException e) {
+			return ResponseEntity.notFound().build();
+		} catch (Exception e) {
+			return ResponseEntity.badRequest().build();
+		}
+	}
+	
 
 }

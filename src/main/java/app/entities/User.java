@@ -1,5 +1,7 @@
 package app.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
@@ -33,10 +35,12 @@ public class User extends BaseEntity{
 	@Pattern(regexp = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$", message = "Email no formato algumacoisa@algumacoisa.algumacoisa.")
 	private String email;
 	
+	@JsonIgnoreProperties
 	@ManyToOne
 	@JoinColumn(name = "department_id")
 	private Department department;
 	
+	@JsonIgnoreProperties
 	@ManyToOne
 	@JoinColumn(name = "company_id")
 	private Company company;
