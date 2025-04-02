@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,6 +21,7 @@ import jakarta.persistence.EntityNotFoundException;
 
 @RestController
 @RequestMapping("/api/department")
+@CrossOrigin("*")
 public class DepartmentController implements IController<Department>{
 	
 	@Autowired
@@ -28,40 +30,22 @@ public class DepartmentController implements IController<Department>{
 	@Override
 	@PostMapping()
 	public ResponseEntity<Department> create(Department entity) {
-		try {
 			Department d = this.departmentService.save(entity);
-			return ResponseEntity.ok(d);			
-		} catch(EntityNotFoundException e) {
-			return ResponseEntity.notFound().build();
-		} catch (Exception e) {
-			return ResponseEntity.badRequest().build();
-		}
+			return ResponseEntity.ok(d);
 	}
 
 	@Override
 	@GetMapping("/{id}")
 	public ResponseEntity<Department> getById(String id) {
-		try {
 			Department d = this.departmentService.findById(id);
-			return ResponseEntity.ok(d);			
-		} catch(EntityNotFoundException e) {
-			return ResponseEntity.notFound().build();
-		} catch (Exception e) {
-			return ResponseEntity.badRequest().build();
-		}
+			return ResponseEntity.ok(d);
 	}
 
 	@Override
 	@GetMapping()
-	public ResponseEntity<List<Department>> getAll() {
-		try {
+	public ResponseEntity<List<Department>> getAll() {		
 			List<Department> d = this.departmentService.findAll();
-			return ResponseEntity.ok(d);			
-		} catch(EntityNotFoundException e) {
-			return ResponseEntity.notFound().build();
-		} catch (Exception e) {
-			return ResponseEntity.badRequest().build();
-		}
+			return ResponseEntity.ok(d);
 	}
 
 	@Override
@@ -73,28 +57,16 @@ public class DepartmentController implements IController<Department>{
 
 	@Override
 	@PutMapping("/{id}")
-	public ResponseEntity<Department> update(String id, Department entity) {
-		try {
+	public ResponseEntity<Department> update(String id, Department entity) {		
 			Department d = this.departmentService.update(id, entity);
-			return ResponseEntity.ok(d);			
-		} catch(EntityNotFoundException e) {
-			return ResponseEntity.notFound().build();
-		} catch (Exception e) {
-			return ResponseEntity.badRequest().build();
-		}
+			return ResponseEntity.ok(d);
 	}
 
 	@Override
 	@DeleteMapping("/{id}")
-	public ResponseEntity<Void> delete(String id) {
-		try {
+	public ResponseEntity<Void> delete(String id) {		
 			this.departmentService.delete(id);
-			return ResponseEntity.ok(null);			
-		} catch(EntityNotFoundException e) {
-			return ResponseEntity.notFound().build();
-		} catch (Exception e) {
-			return ResponseEntity.badRequest().build();
-		}
+			return ResponseEntity.ok(null);		
 	}
 
 	@Override
@@ -106,26 +78,14 @@ public class DepartmentController implements IController<Department>{
 	
 	@GetMapping("/findByNameStartingWith")
 	public ResponseEntity<Department> findByNameStartingWith(@RequestParam String name) {
-		try {
 			this.departmentService.findByNameStartingWith(name);
-			return ResponseEntity.ok(null);			
-		} catch(EntityNotFoundException e) {
-			return ResponseEntity.notFound().build();
-		} catch (Exception e) {
-			return ResponseEntity.badRequest().build();
-		}
+			return ResponseEntity.ok(null);		
 	}
 	
 	@GetMapping("/findByDescriptionContaining")
-	public ResponseEntity<Department> findByDescriptionContaining(@RequestParam String address) {
-		try {
+	public ResponseEntity<Department> findByDescriptionContaining(@RequestParam String address) {		
 			this.departmentService.findByDescriptionContaining(address);
-			return ResponseEntity.ok(null);			
-		} catch(EntityNotFoundException e) {
-			return ResponseEntity.notFound().build();
-		} catch (Exception e) {
-			return ResponseEntity.badRequest().build();
-		}
+			return ResponseEntity.ok(null);		
 	}
 	
 

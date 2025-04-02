@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,6 +24,7 @@ import jakarta.persistence.EntityNotFoundException;
 
 @RestController
 @RequestMapping("/api/user")
+@CrossOrigin("*")
 public class UserController implements IController<User>{
 	
 	@Autowired
@@ -31,36 +33,22 @@ public class UserController implements IController<User>{
 	@Override
 	@PostMapping()
 	public ResponseEntity<User> create(@RequestBody User entity) {
-		try {
 			User u = this.userService.save(entity);
 			return new ResponseEntity<>(u, HttpStatus.OK);
-		} catch (Exception e) {
-			return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);			
-		}
 	}
 
 	@Override
 	@GetMapping("/{id}")
 	public ResponseEntity<User> getById(@PathVariable String id) {
-		try {
 			User u = this.userService.findById(id);
-			return ResponseEntity.ok(u);			
-		} catch (EntityNotFoundException e) {
-			return ResponseEntity.notFound().build();
-		} catch (Exception e) {
-			return ResponseEntity.badRequest().build();
-		}
+			return ResponseEntity.ok(u);
 	}
 
 	@Override
 	@GetMapping()
 	public ResponseEntity<List<User>> getAll() {
-		try {
 			List<User> users= this.userService.findAll();
 			return new ResponseEntity<>(users, HttpStatus.OK);
-		} catch (Exception e) {
-			return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);			
-		}
 	}
 
 	@Override
@@ -73,25 +61,15 @@ public class UserController implements IController<User>{
 	@Override
 	@PutMapping("/{id}")
 	public ResponseEntity<User> update(@PathVariable String id, @RequestBody User entity) {
-		try {
 			User u = this.userService.update(id, entity);
 			return new ResponseEntity<>(u, HttpStatus.OK);
-		} catch (Exception e) {
-			return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);			
-		}
 	}
 
 	@Override
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Void> delete(@PathVariable String id) {
-		try {
 			this.userService.delete(id);
-			return ResponseEntity.ok(null);						
-		} catch (EntityNotFoundException e) {
-			return ResponseEntity.notFound().build();
-		} catch (Exception e) {
-			return ResponseEntity.badRequest().build();
-		}
+			return ResponseEntity.ok(null);
 	}
 
 	@Override
@@ -103,26 +81,14 @@ public class UserController implements IController<User>{
 	
 	@GetMapping("/findByNameStartingWith")
 	public ResponseEntity<List<User>> findByNameStartingWith(@RequestParam String name) {
-		try {
 			this.userService.findByNameStartingWith(name);
-			return ResponseEntity.ok(null);						
-		} catch (EntityNotFoundException e) {
-			return ResponseEntity.notFound().build();
-		} catch (Exception e) {
-			return ResponseEntity.badRequest().build();
-		}
+			return ResponseEntity.ok(null);
 	}
 	
 	@GetMapping("/findByEmailContaining")
 	public ResponseEntity<List<User>> findByEmailContaining(@RequestParam String email) {
-		try {
 			this.userService.findByEmailContaining(email);
-			return ResponseEntity.ok(null);						
-		} catch (EntityNotFoundException e) {
-			return ResponseEntity.notFound().build();
-		} catch (Exception e) {
-			return ResponseEntity.badRequest().build();
-		}
+			return ResponseEntity.ok(null);
 	}
 
 }

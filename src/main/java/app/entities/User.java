@@ -35,6 +35,8 @@ public class User extends BaseEntity{
 	@Pattern(regexp = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$", message = "Email no formato algumacoisa@algumacoisa.algumacoisa.")
 	private String email;
 	
+	private String password;
+	
 	@JsonIgnoreProperties
 	@ManyToOne
 	@JoinColumn(name = "department_id")

@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,6 +21,7 @@ import app.services.CategoryService;
 
 @RestController
 @RequestMapping("/api/categories")
+@CrossOrigin("*")
 public class CategoryController implements IController<Category> {
 	
 	@Autowired
@@ -27,32 +29,20 @@ public class CategoryController implements IController<Category> {
 
 	@Override
 	@PostMapping
-	public ResponseEntity<Category> create(Category entity) {
-		try {
-			return ResponseEntity.ok(categoryService.save(entity));
-		} catch (Exception e) {
-			return ResponseEntity.badRequest().build();
-		}
+	public ResponseEntity<Category> create(Category entity) {		
+			return ResponseEntity.ok(categoryService.save(entity));		
 	}
 
 	@Override
 	@GetMapping("/{id}")
-	public ResponseEntity<Category> getById(@PathVariable String id) {
-		try {
-			return ResponseEntity.ok(categoryService.findById(id));
-		} catch (Exception e) {
-			return ResponseEntity.badRequest().build();
-		}
+	public ResponseEntity<Category> getById(@PathVariable String id) {		
+			return ResponseEntity.ok(categoryService.findById(id));		
 	}
 
 	@Override
 	@GetMapping
-	public ResponseEntity<List<Category>> getAll() {
-		try {
-			return ResponseEntity.ok(categoryService.findAll());
-		} catch (Exception e) {
-			return ResponseEntity.badRequest().build();
-		}
+	public ResponseEntity<List<Category>> getAll() {		
+			return ResponseEntity.ok(categoryService.findAll());		
 	}
 
 	@Override
@@ -65,22 +55,15 @@ public class CategoryController implements IController<Category> {
 	@Override
 	@PutMapping("/{id}")
 	public ResponseEntity<Category> update(@PathVariable String id, @RequestBody Category entity) {
-		try {
-			return ResponseEntity.ok(categoryService.update(id, entity));
-		} catch (Exception e) {
-			return ResponseEntity.badRequest().build();
-		}
+		
+			return ResponseEntity.ok(categoryService.update(id, entity));		
 	}
 
 	@Override
 	@DeleteMapping("/{id}")
-	public ResponseEntity<Void> delete(@PathVariable String id) {
-		try {
+	public ResponseEntity<Void> delete(@PathVariable String id) {		
 			categoryService.delete(id);
-			return ResponseEntity.noContent().build();
-		} catch (Exception e) {
-			return ResponseEntity.badRequest().build();
-		}
+			return ResponseEntity.noContent().build();		
 	}
 
 	@Override

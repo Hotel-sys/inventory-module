@@ -3,6 +3,7 @@ package app.controllers;
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -11,6 +12,7 @@ import app.interfaces.IController;
 
 @RestController
 @RequestMapping("/api/stockarchives")
+@CrossOrigin("*")
 public class StockArchiveController implements IController<StockArchive> {
 
 	@Override

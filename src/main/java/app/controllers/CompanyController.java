@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,6 +22,7 @@ import jakarta.persistence.EntityNotFoundException;
 
 @RestController
 @RequestMapping("/api/company")
+@CrossOrigin("*")
 public class CompanyController implements IController<Company>{
 	
 	@Autowired
@@ -28,41 +30,24 @@ public class CompanyController implements IController<Company>{
 
 	@Override
 	@PostMapping()
-	public ResponseEntity<Company> create(@RequestBody Company entity) {
-		try {
+	public ResponseEntity<Company> create(@RequestBody Company entity) {		
 			Company c = this.companyService.save(entity);
-			return ResponseEntity.ok(c);			
-		} catch(EntityNotFoundException e) {
-			return ResponseEntity.notFound().build();
-		} catch (Exception e) {
-			return ResponseEntity.badRequest().build();
-		}
+			return ResponseEntity.ok(c);		
 	}
 
 	@Override
 	@GetMapping("/{id}")
-	public ResponseEntity<Company> getById(@PathVariable String id) {
-		try {
+	public ResponseEntity<Company> getById(@PathVariable String id) {		
 			Company c = this.companyService.findById(id);
 			return ResponseEntity.ok(c);			
-		} catch(EntityNotFoundException e) {
-			return ResponseEntity.notFound().build();
-		} catch (Exception e) {
-			return ResponseEntity.badRequest().build();
-		}
 	}
 
 	@Override
 	@GetMapping()
-	public ResponseEntity<List<Company>> getAll() {
-		try {
+	public ResponseEntity<List<Company>> getAll() {		
 			List<Company> companies = this.companyService.findAll();
-			return ResponseEntity.ok(companies);			
-		} catch(EntityNotFoundException e) {
-			return ResponseEntity.notFound().build();
-		} catch (Exception e) {
-			return ResponseEntity.badRequest().build();
-		}
+			return ResponseEntity.ok(companies);		
+		
 	}
 
 	@Override
@@ -74,28 +59,16 @@ public class CompanyController implements IController<Company>{
 
 	@Override
 	@PutMapping("/{id}")
-	public ResponseEntity<Company> update(@PathVariable String id, @RequestBody Company entity) {
-		try {
+	public ResponseEntity<Company> update(@PathVariable String id, @RequestBody Company entity) {		
 			Company c = this.companyService.update(id, entity);
-			return ResponseEntity.ok(c);			
-		} catch(EntityNotFoundException e) {
-			return ResponseEntity.notFound().build();
-		} catch (Exception e) {
-			return ResponseEntity.badRequest().build();
-		}
+			return ResponseEntity.ok(c);		
 	}
 
 	@Override
 	@DeleteMapping("/{id}")
-	public ResponseEntity<Void> delete(String id) {
-		try {
+	public ResponseEntity<Void> delete(String id) {		
 			this.companyService.delete(id);
-			return ResponseEntity.ok(null);			
-		} catch(EntityNotFoundException e) {
-			return ResponseEntity.notFound().build();
-		} catch (Exception e) {
-			return ResponseEntity.badRequest().build();
-		}
+			return ResponseEntity.ok(null);		
 	}
 
 	@Override
@@ -106,27 +79,15 @@ public class CompanyController implements IController<Company>{
 	}
 	
 	@GetMapping("/findByNameStartingWith")
-	public ResponseEntity<List<Company>> findByNameStartingWith(@RequestParam String name) {
-		try {
+	public ResponseEntity<List<Company>> findByNameStartingWith(@RequestParam String name) {		
 			List<Company> companies = this.companyService.findByNameStartingWith(name);
-			return ResponseEntity.ok(companies);			
-		} catch(EntityNotFoundException e) {
-			return ResponseEntity.notFound().build();
-		} catch (Exception e) {
-			return ResponseEntity.badRequest().build();
-		}
+			return ResponseEntity.ok(companies);		
 	}
 	
 	@GetMapping("/findByAddressContaining")
-	public ResponseEntity<List<Company>> findByAddressContaining(@RequestParam String address) {
-		try {
+	public ResponseEntity<List<Company>> findByAddressContaining(@RequestParam String address) {		
 			List<Company> companies = this.companyService.findByAddressContaining(address);
-			return ResponseEntity.ok(companies);			
-		} catch(EntityNotFoundException e) {
-			return ResponseEntity.notFound().build();
-		} catch (Exception e) {
-			return ResponseEntity.badRequest().build();
-		}
+			return ResponseEntity.ok(companies);		
 	}
 
 }
