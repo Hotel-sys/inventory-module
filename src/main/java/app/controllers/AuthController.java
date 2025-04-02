@@ -1,6 +1,8 @@
 package app.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,12 +22,17 @@ public class AuthController {
 	private AuthService authService;
 	
 	@PostMapping("/login")
-	public void login(@RequestBody LoginRequest loginRequest) {
-		
+	public ResponseEntity<String> login(@RequestBody LoginRequest loginRequest) {
+		String result = authService.login(loginRequest);
+		return new ResponseEntity<>(result, HttpStatus.OK);		
 	}
 	
 	@GetMapping("/logout")
-	public void logout() {
+	public ResponseEntity<Void> logout() {
+		if(authService.logout()) {
+			return ResponseEntity.noContent().build();
+		}
 		
+		return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
 	}
 }

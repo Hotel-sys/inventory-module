@@ -15,14 +15,18 @@ public class AuthService {
 	@Autowired
 	private UserRepository userRepository;
 	
-	public void login(LoginRequest loginRequest) {
+	public String login(LoginRequest loginRequest) {
 		Optional<User> user = userRepository.findByEmail(loginRequest.getEmail());
 		if(user.isPresent()) {
-			if(user.get)
+			if(user.get().getPassword().equals(loginRequest.getSenha())) {
+				return "Email verified.";
+			}
+			return "Credentials failed.";
 		}
+		return "User is not present";
 	}
 	
-	public void logout() {
-			
+	public boolean logout() {
+			return true;
 	}
 }
