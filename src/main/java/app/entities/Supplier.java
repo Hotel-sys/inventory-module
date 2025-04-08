@@ -1,12 +1,12 @@
 package app.entities;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
-import jakarta.annotation.Nullable;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -24,17 +24,22 @@ public class Supplier extends BaseEntity {
 	private static final long serialVersionUID = 1L;
 
 	private String name;
-		
+
 	private String address;
-	
+
 	private String phone;
-	
+
 	private String email;
-	
+
 	private String notes;
-	
+
 	private String paymentTerms;
-	
+
 	private LocalDateTime deliverySchedule;
-	
+
+    @JsonBackReference
+    @ManyToOne
+    @JoinColumn(name = "company_id")
+    private Company  company;
+
 }

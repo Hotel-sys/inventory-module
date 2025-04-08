@@ -2,10 +2,9 @@ package app.entities;
 
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
-import jakarta.annotation.Nullable;
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
@@ -31,49 +30,48 @@ public class StockItem extends BaseEntity {
 
 	@NotBlank
 	private String name;
-	
+
 	@NotBlank
 	private String description;
-	
+
 	private int quantity;
-	
+
 	private String unit;
-	
+
 	private boolean archived;
-	
+
 	/*
 	@JsonIgnoreProperties
 	@ManyToOne
 	@JoinColumn(name = "category_id")
 	private Category category;
 	*/
-	
-	@JsonIgnoreProperties
+
+	@JsonManagedReference
 	@ManyToMany
     @JoinTable(
-        name = "stockitem_category", 
-        joinColumns = @JoinColumn(name = "stock_item_id"), 
-        inverseJoinColumns = @JoinColumn(name = "category_id") 
+        name = "stockitem_category",
+        joinColumns = @JoinColumn(name = "stock_item_id"),
+        inverseJoinColumns = @JoinColumn(name = "category_id")
     )
 	private List<Category> categories;
-	
-	@JsonIgnoreProperties
+
+	@JsonBackReference
 	@ManyToOne
 	@JoinColumn(name = "supplier_id")
 	private Supplier supplier;
-	
-	@JsonIgnoreProperties
+
 	@OneToOne(mappedBy = "stockItem")
 	private StockArchive stockArchive;
-	
-	@JsonIgnoreProperties
+
+	@JsonBackReference
 	@ManyToOne
 	@JoinColumn(name = "company_id")
 	private Company company;
-	
-	@JsonIgnoreProperties
+
+	@JsonBackReference
 	@ManyToOne
 	@JoinColumn(name = "department_id")
 	private Department department;
-	
+
 }

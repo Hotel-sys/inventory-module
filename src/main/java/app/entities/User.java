@@ -1,5 +1,6 @@
 package app.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.Entity;
@@ -23,26 +24,26 @@ import lombok.NoArgsConstructor;
 @EqualsAndHashCode(callSuper = false)
 @Table(name="user_tb")
 public class User extends BaseEntity{
-	
+
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = 1L;
 
 	@NotBlank(message="User's name is required!")
 	private String name;
-	
+
 	@Pattern(regexp = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$", message = "Email no formato algumacoisa@algumacoisa.algumacoisa.")
 	private String email;
-	
+
 	private String password;
-	
-	@JsonIgnoreProperties
+
+	@JsonBackReference
 	@ManyToOne
 	@JoinColumn(name = "department_id")
 	private Department department;
-	
-	@JsonIgnoreProperties
+
+	@JsonBackReference
 	@ManyToOne
 	@JoinColumn(name = "company_id")
 	private Company company;

@@ -1,11 +1,10 @@
 package app.entities;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import io.micrometer.common.lang.Nullable;
 import jakarta.persistence.Entity;
@@ -26,48 +25,48 @@ import lombok.NoArgsConstructor;
 @Data
 @EqualsAndHashCode(callSuper = false)
 public class Company extends BaseEntity{
-	
+
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = 1L;
 
 	@NotBlank(message="Company's name is required!")
-	private String name;	
-	
+	private String name;
+
 	@NotBlank(message="Company's address is required!")
 	private String address;
-	
+
 	@NotBlank(message="Company's contact_info is required!")
 	private String contactInfo;
-	
+
 	@NotBlank(message="Company's phone is required!")
 	private String phone;
-	
+
 	@Pattern(regexp = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$", message = "Email no formato algumacoisa@algumacoisa.algumacoisa.")
 	private String email;
-	
+
 	@NotBlank(message="Company's industry is required!")
 	private String industry;
-	
+
 	@NotBlank(message="Company's registration_number is required!")
-	private String registrationNumber;	
-	
+	private String registrationNumber;
+
 	@JsonFormat(pattern = "yyyy-MM-dd")
 	@NotNull
 	private LocalDate establishedDate;
-	
+
 	@Nullable
 	private String website;
-	
+
 	@Nullable
-	private String notes;	
-	
-	@JsonIgnoreProperties
+	private String notes;
+
+	@JsonManagedReference
 	@OneToMany(mappedBy = "company")
 	private List<User> users;
-	
+
 //	@OneToMany(mappedBy = "stockItem")
 //	private List<StockItem> stockItems;
-	
+
 }
