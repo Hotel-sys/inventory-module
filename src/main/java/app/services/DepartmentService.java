@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import app.entities.Department;
 import app.interfaces.IService;
@@ -78,11 +79,11 @@ public class DepartmentService implements IService<Department>{
 		
 	}
 	
-	public List<Department> findByNameStartingWith(String name) {
+	public List<Department> findByNameStartingWith(@RequestParam String name) {
 		return this.departmentRepository.findByNameStartingWith(name);
 	}
 	
-	public List<Department> findByDescriptionContaining(String address) {
+	public List<Department> findByDescriptionContaining(@RequestParam String address) {
 		return this.departmentRepository.findByDescriptionContaining(address);
 	}
 

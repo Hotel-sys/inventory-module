@@ -29,7 +29,7 @@ public class CategoryController implements IController<Category> {
 
 	@Override
 	@PostMapping
-	public ResponseEntity<Category> create(Category entity) {		
+	public ResponseEntity<Category> create(@RequestBody Category entity) {		
 			return ResponseEntity.ok(categoryService.save(entity));		
 	}
 

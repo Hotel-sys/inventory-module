@@ -66,7 +66,7 @@ public class CompanyController implements IController<Company>{
 
 	@Override
 	@DeleteMapping("/{id}")
-	public ResponseEntity<Void> delete(String id) {		
+	public ResponseEntity<Void> delete(@PathVariable String id) {		
 			this.companyService.delete(id);
 			return ResponseEntity.ok(null);		
 	}

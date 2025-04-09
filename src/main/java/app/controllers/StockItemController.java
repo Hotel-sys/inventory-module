@@ -29,7 +29,7 @@ public class StockItemController implements IController<StockItem> {
 	
 	@Override
 	@PostMapping
-	public ResponseEntity<StockItem> create(StockItem entity) {
+	public ResponseEntity<StockItem> create(@RequestBody StockItem entity) {
 			return ResponseEntity.ok(stockItemService.save(entity));
 	}
 

@@ -2,6 +2,7 @@ package app.entities;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.Entity;
@@ -32,7 +33,7 @@ public class Department extends BaseEntity{
 	@NotBlank(message="Department's description is required!")
 	private String description;
 
-	@JsonManagedReference
+	@JsonIgnore
 	@OneToMany(mappedBy = "department")
 	private List<User> user;
 }

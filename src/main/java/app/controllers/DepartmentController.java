@@ -7,8 +7,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -29,14 +31,14 @@ public class DepartmentController implements IController<Department>{
 
 	@Override
 	@PostMapping()
-	public ResponseEntity<Department> create(Department entity) {
+	public ResponseEntity<Department> create(@RequestBody Department entity) {
 			Department d = this.departmentService.save(entity);
 			return ResponseEntity.ok(d);
 	}
 
 	@Override
 	@GetMapping("/{id}")
-	public ResponseEntity<Department> getById(String id) {
+	public ResponseEntity<Department> getById(@PathVariable String id) {
 			Department d = this.departmentService.findById(id);
 			return ResponseEntity.ok(d);
 	}
@@ -57,14 +59,14 @@ public class DepartmentController implements IController<Department>{
 
 	@Override
 	@PutMapping("/{id}")
-	public ResponseEntity<Department> update(String id, Department entity) {		
+	public ResponseEntity<Department> update(@PathVariable String id, @RequestBody Department entity) {		
 			Department d = this.departmentService.update(id, entity);
 			return ResponseEntity.ok(d);
 	}
 
 	@Override
 	@DeleteMapping("/{id}")
-	public ResponseEntity<Void> delete(String id) {		
+	public ResponseEntity<Void> delete(@PathVariable String id) {		
 			this.departmentService.delete(id);
 			return ResponseEntity.ok(null);		
 	}
