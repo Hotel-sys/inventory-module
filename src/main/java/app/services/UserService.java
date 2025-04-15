@@ -2,6 +2,8 @@ package app.services;
 
 import java.util.List;
 
+import app.entities.Department;
+import app.repositories.DepartmentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,8 +21,13 @@ public class UserService implements IService<User> {
 	@Autowired
 	private UserRepository userRepository;
 
+	@Autowired
+	private DepartmentRepository departmentRepository;
+
 	@Override
 	public User save(User entity) {
+		System.out.println(entity.getDepartment());
+
 
 		String tinyName = entity.getName().toLowerCase();
 		entity.setName(tinyName);
@@ -28,6 +35,8 @@ public class UserService implements IService<User> {
 		if (userRepository.existsByEmail(entity.getEmail())) {
 			throw new UserAlreadyExistsException("Usuário com o email " + entity.getEmail() + " já existe.");
 		}
+
+
 		
 		return this.userRepository.save(entity);
 	}

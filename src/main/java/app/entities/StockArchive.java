@@ -2,22 +2,19 @@ package app.entities;
 
 import java.time.LocalDateTime;
 
+import jakarta.persistence.*;
+import org.hibernate.annotations.UuidGenerator;
 import org.springframework.data.annotation.CreatedDate;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.annotation.Nullable;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
-import jakarta.persistence.Temporal;
-import jakarta.persistence.TemporalType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 @Entity
 @Builder
@@ -29,6 +26,10 @@ public class StockArchive extends BaseEntity {
 
 	
 	private static final long serialVersionUID = 1L;
+
+	@Id
+	@UuidGenerator
+	private String id;
 
 	@OneToOne
 	private StockItem stockItem;
