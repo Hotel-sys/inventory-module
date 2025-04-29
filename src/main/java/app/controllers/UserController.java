@@ -23,8 +23,8 @@ import app.services.UserService;
 import jakarta.persistence.EntityNotFoundException;
 
 @RestController
-@RequestMapping("/api/user")
-@CrossOrigin("*")
+@RequestMapping("/api/users")
+@CrossOrigin(origins="*")
 public class UserController implements IController<User>{
 	
 	@Autowired
