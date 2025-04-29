@@ -1,9 +1,12 @@
 package app.entities;
 
+import org.hibernate.annotations.UuidGenerator;
+
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
@@ -29,6 +32,10 @@ public class User extends BaseEntity{
 	 *
 	 */
 	private static final long serialVersionUID = 1L;
+
+	@Id
+	@UuidGenerator
+	private String id;
 
 	@NotBlank(message="User's name is required!")
 	private String name;

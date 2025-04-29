@@ -2,6 +2,7 @@ package app.entities;
 
 import java.time.LocalDateTime;
 
+import org.hibernate.annotations.UuidGenerator;
 import org.springframework.data.annotation.CreatedDate;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -9,6 +10,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.annotation.Nullable;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Temporal;
@@ -29,6 +31,9 @@ public class StockArchive extends BaseEntity {
 
 	
 	private static final long serialVersionUID = 1L;
+	@Id
+	@UuidGenerator
+	private String id;
 
 	@OneToOne
 	private StockItem stockItem;

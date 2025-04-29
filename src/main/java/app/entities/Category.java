@@ -2,10 +2,13 @@ package app.entities;
 
 import java.util.List;
 
+import org.hibernate.annotations.UuidGenerator;
+
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.annotation.Nullable;
 import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
@@ -23,6 +26,10 @@ import lombok.NoArgsConstructor;
 public class Category extends BaseEntity {
 
 	private static final long serialVersionUID = 1L;
+
+	@Id
+	@UuidGenerator
+	private String id;
 
 	@NotBlank
 	private String name;

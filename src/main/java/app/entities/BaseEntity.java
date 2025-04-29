@@ -21,11 +21,7 @@ import jakarta.persistence.TemporalType;
 @EntityListeners(AuditingEntityListener.class)
 public abstract class BaseEntity implements Serializable {
 	
-	private static final long serialVersionUID = 1L;
-
-	@Id
-	@UuidGenerator
-	private String id;
+	private static final long serialVersionUID = 1L;	
 	
 	@Column(nullable = false, updatable = false)
 	@Temporal(TemporalType.TIMESTAMP)

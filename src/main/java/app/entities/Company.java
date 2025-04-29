@@ -3,11 +3,14 @@ package app.entities;
 import java.time.LocalDate;
 import java.util.List;
 
+import org.hibernate.annotations.UuidGenerator;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import io.micrometer.common.lang.Nullable;
 import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -30,6 +33,10 @@ public class Company extends BaseEntity{
 	 *
 	 */
 	private static final long serialVersionUID = 1L;
+
+	@Id
+	@UuidGenerator
+	private String id;
 
 	@NotBlank(message="Company's name is required!")
 	private String name;
