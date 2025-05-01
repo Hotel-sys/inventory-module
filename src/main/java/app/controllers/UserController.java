@@ -90,5 +90,10 @@ public class UserController implements IController<User>{
 			this.userService.findByEmailContaining(email);
 			return ResponseEntity.ok(null);
 	}
+	
+	@GetMapping("/greeting")
+	public ResponseEntity<String> greeting() {
+	    return ResponseEntity.ok("Hello, welcome to the User API!");
+	}
 
 }

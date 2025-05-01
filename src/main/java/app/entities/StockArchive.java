@@ -2,17 +2,13 @@ package app.entities;
 
 import java.time.LocalDateTime;
 
-<<<<<<< HEAD
-=======
 import jakarta.persistence.*;
->>>>>>> 9cb2cd39efa980e5fcf040dd930a3fec3b7b176f
 import org.hibernate.annotations.UuidGenerator;
 import org.springframework.data.annotation.CreatedDate;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.annotation.Nullable;
-<<<<<<< HEAD
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -20,8 +16,6 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
-=======
->>>>>>> 9cb2cd39efa980e5fcf040dd930a3fec3b7b176f
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -42,11 +36,7 @@ public class StockArchive extends BaseEntity {
 	@Id
 	@UuidGenerator
 	private String id;
-
-	@Id
-	@UuidGenerator
-	private String id;
-
+	
 	@OneToOne
 	private StockItem stockItem;
 	

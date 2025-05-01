@@ -1,13 +1,8 @@
 package app.entities;
 
 import java.util.List;
-
-<<<<<<< HEAD
 import org.hibernate.annotations.UuidGenerator;
-
-=======
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
->>>>>>> 9cb2cd39efa980e5fcf040dd930a3fec3b7b176f
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.annotation.Nullable;

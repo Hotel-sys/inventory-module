@@ -5,15 +5,12 @@ import org.hibernate.annotations.UuidGenerator;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-<<<<<<< HEAD
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-=======
 import jakarta.persistence.*;
->>>>>>> 9cb2cd39efa980e5fcf040dd930a3fec3b7b176f
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;

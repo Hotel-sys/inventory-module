@@ -61,4 +61,17 @@ public class CategoryServiceTest {
     	assertEquals(list, response);
     	
     }
+    
+//    @Test
+//    @DisplayName("Teste de integração - findById")
+//    void findById() {    	
+//    	
+//    	Category category1 =  new Category();    
+//    	String category1Id = category1.getId();
+//    	
+//    	when(categoryRepository.findById(category1Id)).thenReturn(category1);   
+//    	
+//    	assertEquals(list, response);
+//    	
+//    }
 }

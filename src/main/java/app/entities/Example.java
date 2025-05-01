@@ -21,18 +21,12 @@ import org.hibernate.annotations.UuidGenerator;
 @EqualsAndHashCode(callSuper = false)
 public class Example extends BaseEntity {
 
-
-
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@UuidGenerator
 	private String id;
-<<<<<<< HEAD
 	
-=======
-
->>>>>>> 9cb2cd39efa980e5fcf040dd930a3fec3b7b176f
 	@NotBlank
 	private String ping;	
 	

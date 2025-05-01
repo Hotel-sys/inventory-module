@@ -19,11 +19,9 @@ public class StockArchiveService implements IService<StockArchive> {
 	@Override
 	public StockArchive save(StockArchive entity) {
 		// TODO Auto-generated method stub
-<<<<<<< HEAD
+
 		return null;
-=======
-		return entity;
->>>>>>> 9cb2cd39efa980e5fcf040dd930a3fec3b7b176f
+
 	}
 
 	@Override

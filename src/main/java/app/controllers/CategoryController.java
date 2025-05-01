@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,10 +19,12 @@ import org.springframework.web.bind.annotation.RestController;
 import app.entities.Category;
 import app.interfaces.IController;
 import app.services.CategoryService;
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/api/categories")
 @CrossOrigin("*")
+@Validated
 public class CategoryController implements IController<Category> {
 	
 	@Autowired
@@ -29,7 +32,7 @@ public class CategoryController implements IController<Category> {
 
 	@Override
 	@PostMapping
-	public ResponseEntity<Category> create(@RequestBody Category entity) {		
+	public ResponseEntity<Category> create(@Valid @RequestBody Category entity) {		
 			return ResponseEntity.ok(categoryService.save(entity));		
 	}
 
@@ -54,7 +57,7 @@ public class CategoryController implements IController<Category> {
 
 	@Override
 	@PutMapping("/{id}")
-	public ResponseEntity<Category> update(@PathVariable String id, @RequestBody Category entity) {
+	public ResponseEntity<Category> update(@Valid @PathVariable String id, @RequestBody Category entity) {
 		
 			return ResponseEntity.ok(categoryService.update(id, entity));		
 	}
