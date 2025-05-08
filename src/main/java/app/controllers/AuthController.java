@@ -14,8 +14,8 @@ import app.dtos.LoginRequest;
 import app.services.AuthService;
 
 @RestController
-@RequestMapping("/api/auth")
 @CrossOrigin("*")
+@RequestMapping("/api/auth")
 public class AuthController {
 
 	@Autowired

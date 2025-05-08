@@ -14,7 +14,7 @@ import jakarta.validation.ConstraintViolation;
 import jakarta.validation.ConstraintViolationException;
 
 @ControllerAdvice
-public class GlobalHandlerException {
+public class GlobalExceptionHandler {
 
 	//TRATAMENTO DE ERROS DE VALIDATIONS
 	@ExceptionHandler(MethodArgumentNotValidException.class)
@@ -44,4 +44,5 @@ public class GlobalHandlerException {
 	}
 
 }
+
 

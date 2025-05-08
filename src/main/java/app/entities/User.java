@@ -19,8 +19,13 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+
+import java.util.Collection;
+
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.UuidGenerator;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
 @Entity
@@ -30,7 +35,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Table(name="user_tb")
-public class User extends BaseEntity{
+public class User extends BaseEntity implements UserDetails {
 
 	/**
 	 *
@@ -44,9 +49,12 @@ public class User extends BaseEntity{
 	@NotBlank(message="User's name is required!")
 	private String name;
 
+	
+	@NotBlank(message="User's email is required!")
 	@Pattern(regexp = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$", message = "Email no formato algumacoisa@algumacoisa.algumacoisa.")
 	private String email;
 
+	@NotBlank(message="User's password is required!")
 	private String password;
 
 	@JsonIgnoreProperties("users")
@@ -59,4 +67,16 @@ public class User extends BaseEntity{
 	@JoinColumn(name = "company_id")
 	@Cascade(value = org.hibernate.annotations.CascadeType.DETACH)
 	private Company company;
+
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		
+		return null;
+	}
+
+	@Override
+	public String getUsername() {
+		
+		return null;
+	}
 }
