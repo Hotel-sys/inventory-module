@@ -5,6 +5,7 @@ import java.util.List;
 import app.entities.Department;
 import app.repositories.DepartmentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import app.entities.User;
@@ -23,11 +24,18 @@ public class UserService implements IService<User> {
 
 	@Autowired
 	private DepartmentRepository departmentRepository;
+	
+	@Autowired
+	private BCryptPasswordEncoder bcryptEncoder;
 
 	@Override
 	public User save(User entity) {
-		System.out.println(entity.getDepartment());
-
+		//System.out.println(entity.getDepartment());
+		
+		String senhaCriptografada = bcryptEncoder.encode(entity.getPassword());
+		entity.setPassword(senhaCriptografada);
+		
+		//this.userRepository.save(entity);		
 
 		String tinyName = entity.getName().toLowerCase();
 		entity.setName(tinyName);
@@ -35,8 +43,6 @@ public class UserService implements IService<User> {
 		if (userRepository.existsByEmail(entity.getEmail())) {
 			throw new UserAlreadyExistsException("Usuário com o email " + entity.getEmail() + " já existe.");
 		}
-
-
 		
 		return this.userRepository.save(entity);
 	}

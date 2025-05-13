@@ -48,7 +48,6 @@ public class User extends BaseEntity implements UserDetails {
 
 	@NotBlank(message="User's name is required!")
 	private String name;
-
 	
 	@NotBlank(message="User's email is required!")
 	@Pattern(regexp = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$", message = "Email no formato algumacoisa@algumacoisa.algumacoisa.")
