@@ -16,6 +16,7 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Builder.Default;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -47,7 +48,10 @@ public class User extends BaseEntity implements UserDetails {
 	private String id;
 
 	@NotBlank(message="User's name is required!")
-	private String name;
+	private String name;	
+	
+	@Builder.Default
+	private String role = "Admin";
 	
 	@NotBlank(message="User's email is required!")
 	@Pattern(regexp = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$", message = "Email no formato algumacoisa@algumacoisa.algumacoisa.")

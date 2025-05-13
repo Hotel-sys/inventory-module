@@ -11,7 +11,7 @@ import java.util.function.Function;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
-import app.auth.Usuario;
+import app.entities.User;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -27,11 +27,11 @@ public class JwtServiceGenerator {
 	public static final SignatureAlgorithm ALGORITMO_ASSINATURA = SignatureAlgorithm.HS256;
 	public static final int HORAS_EXPIRACAO_TOKEN = 1;
 
-	public Map<String, Object> gerarPayload(Usuario usuario){
+	public Map<String, Object> gerarPayload(User usuario){
 		//AQUI VOCÊ PODE COLOCAR O QUE MAIS VAI COMPOR O PAYLOAD DO TOKEN
 		
 		Map<String, Object> payloadData = new HashMap<>();
-		payloadData.put("username", usuario.getUsername());
+		payloadData.put("email", usuario.getEmail());
 		payloadData.put("id", usuario.getId().toString());
 		payloadData.put("role", usuario.getRole());
 		payloadData.put("outracoisa", "teste");
@@ -45,14 +45,14 @@ public class JwtServiceGenerator {
 	
 	
 	
-	public String generateToken(Usuario usuario) {
+	public String generateToken(User usuario) {
 
 		Map<String, Object> payloadData = this.gerarPayload(usuario);
 
 		return Jwts
 				.builder()
 				.setClaims(payloadData)
-				.setSubject(usuario.getUsername())
+				.setSubject(usuario.getEmail())
 				.setIssuedAt(new Date(System.currentTimeMillis()))
 				.setExpiration(new Date(new Date().getTime() + 3600000 * this.HORAS_EXPIRACAO_TOKEN))
 				.signWith(getSigningKey(), this.ALGORITMO_ASSINATURA)
@@ -70,8 +70,8 @@ public class JwtServiceGenerator {
 
 
 	public boolean isTokenValid(String token, UserDetails userDetails) {
-		final String username = extractUsername(token);
-		return (username.equals(userDetails.getUsername())) && !isTokenExpired(token);
+		final String email = extractEmail(token);
+		return (email.equals(userDetails.getUsername())) && !isTokenExpired(token);
 	}
 
 	private boolean isTokenExpired(String token) {
@@ -88,7 +88,7 @@ public class JwtServiceGenerator {
 	}
 
 
-	public String extractUsername(String token) {
+	public String extractEmail(String token) {
 		return extractClaim(token,Claims::getSubject);
 	}
 

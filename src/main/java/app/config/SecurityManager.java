@@ -12,20 +12,19 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import app.auth.LoginRepository;
+import app.repositories.UserRepository;
 
 @Configuration
 public class SecurityManager {
 	
 	@Autowired
-	private LoginRepository loginRepository;
+	private UserRepository loginRepository;
 	
 	
 	@Bean
 	public PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
 	}
-
 	
 	@Bean
 	public AuthenticationProvider authenticationProvider() {
@@ -43,7 +42,7 @@ public class SecurityManager {
 
 	@Bean
 	public UserDetailsService userDetailsService() {
-		return username -> loginRepository.findByUsername(username)
+		return username -> loginRepository.findByEmail(username)
 				.orElseThrow(() -> new UsernameNotFoundException("Usuário não encontrado") );
 	}
 

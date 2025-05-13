@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import app.dtos.LoginRequest;
+import app.dtos.LoginResponse;
 import app.services.AuthService;
 
 @RestController
@@ -22,8 +23,8 @@ public class AuthController {
 	private AuthService authService;
 	
 	@PostMapping("/login")
-	public ResponseEntity<String> login(@RequestBody LoginRequest loginRequest) {
-		String result = authService.login(loginRequest);
+	public ResponseEntity<LoginResponse> login(@RequestBody LoginRequest loginRequest) {
+		LoginResponse result = authService.login(loginRequest);
 		return new ResponseEntity<>(result, HttpStatus.OK);		
 	}
 	
