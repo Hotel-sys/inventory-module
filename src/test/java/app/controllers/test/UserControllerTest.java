@@ -24,10 +24,10 @@ import app.services.UserService;
 public class UserControllerTest {
 
     @Mock
-    private UserService userService; // Mock do serviço
+    private UserService userService; 
 
     @InjectMocks
-    private UserController userController; // Injeção dos mocks no controller
+    private UserController userController; 
 
     @Test
     @DisplayName("Teste de integração - create")
@@ -91,12 +91,9 @@ public class UserControllerTest {
     }
     
     @Test
-    @DisplayName("Teste unitário - greeting")
-    void greeting() {
-        
-        ResponseEntity<String> response = userController.greeting();
-
-        assertEquals(HttpStatus.OK, response.getStatusCode());
-        assertEquals("Hello, welcome to the User API!", response.getBody());
+    @DisplayName("Teste unitário - Nome válido com mais de 3 caracteres")
+    void validateName() {
+        ResponseEntity<Boolean> response = userController.validateName("Lucas");
+        assertEquals(true, response.getBody());
     }
 }

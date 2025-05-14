@@ -94,9 +94,10 @@ public class UserController implements IController<User>{
 			return ResponseEntity.ok(null);
 	}
 	
-	@GetMapping("/greeting")
-	public ResponseEntity<String> greeting() {
-	    return ResponseEntity.ok("Hello, welcome to the User API!");
+	@GetMapping("/validate-name")
+	public ResponseEntity<Boolean> validateName(@RequestParam String name) {
+	    boolean isValid = name != null && name.trim().length() >= 3;
+	    return ResponseEntity.ok(isValid);
 	}
 
 }
