@@ -26,6 +26,7 @@ import jakarta.persistence.EntityNotFoundException;
 @RestController
 @RequestMapping("/api/users")
 @CrossOrigin(origins="*")
+@PreAuthorize("hasAuthority('SUPERADMIN')")
 public class UserController implements IController<User>{
 	
 	@Autowired
@@ -33,6 +34,7 @@ public class UserController implements IController<User>{
 
 	@Override
 	@PostMapping()
+	@PreAuthorize("hasAuthority('SUPERADMIN')")
 	public ResponseEntity<User> create(@RequestBody User entity) {
 			User u = this.userService.save(entity);
 			return new ResponseEntity<>(u, HttpStatus.OK);

@@ -8,9 +8,6 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import app.auth.Login;
-import app.auth.LoginRepository;
-import app.auth.Usuario;
 import app.config.JwtServiceGenerator;
 import app.dtos.LoginRequest;
 import app.dtos.LoginResponse;
@@ -43,6 +40,7 @@ public class AuthService {
 				);
 		User user = userRepository.findByEmail(loginRequest.getEmail()).get();
 		String jwtToken = jwtService.generateToken(user);
+		System.out.println(jwtToken);
 		return jwtToken;
 	}
 	

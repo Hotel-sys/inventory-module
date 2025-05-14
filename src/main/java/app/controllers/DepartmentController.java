@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,22 +16,21 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import app.entities.Company;
 import app.entities.Department;
 import app.interfaces.IController;
 import app.services.DepartmentService;
-import jakarta.persistence.EntityNotFoundException;
 
 @RestController
 @RequestMapping("/api/department")
 @CrossOrigin("*")
+@PreAuthorize("hasAuthority('ADMIN')")
 public class DepartmentController implements IController<Department>{
 	
 	@Autowired
 	private DepartmentService departmentService;
 
 	@Override
-	@PostMapping()
+	@PostMapping("/teste")
 	public ResponseEntity<Department> create(@RequestBody Department entity) {
 			Department d = this.departmentService.save(entity);
 			return ResponseEntity.ok(d);

@@ -23,7 +23,7 @@ public class JwtServiceGenerator {
 
 	///////////////////////////////////////////////////////
 	//Parâmetros para geração do token
-	public static final String SECRET_KEY = "OURSECRETKEYOURSECRETKEYOURSECRETKEYOURSECRETKEYOURSECRETKEYOURSECRETKEY";
+	public static final String SECRET_KEY = "UMACHAVESECRETADASUAAPIAQUIUMACHAVESECRETADASUAAPIAQUIUMACHAVESECRETADASUAAPIAQUIUMACHAVESECRETADASUAAPIAQUI";
 	public static final SignatureAlgorithm ALGORITMO_ASSINATURA = SignatureAlgorithm.HS256;
 	public static final int HORAS_EXPIRACAO_TOKEN = 1;
 
@@ -70,6 +70,7 @@ public class JwtServiceGenerator {
 
 
 	public boolean isTokenValid(String token, UserDetails userDetails) {
+		System.out.println("");
 		final String email = extractEmail(token);
 		return (email.equals(userDetails.getUsername())) && !isTokenExpired(token);
 	}

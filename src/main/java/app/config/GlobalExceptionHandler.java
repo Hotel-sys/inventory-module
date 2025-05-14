@@ -39,6 +39,7 @@ public class GlobalExceptionHandler {
 	//TRATAMENTO DOS DEMAIS ERROS DA APLICAÇÃO E DE REGRAS DE NEGÓCIO
 	@ExceptionHandler(Exception.class)
 	public ResponseEntity<String> handle03(Exception ex) {
+		System.out.println(ex.getMessage());
 		ex.printStackTrace();
 		return new ResponseEntity<String>(ex.getMessage(), HttpStatus.BAD_REQUEST);
 	}
