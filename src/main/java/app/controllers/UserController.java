@@ -3,6 +3,7 @@ package app.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
@@ -52,6 +53,12 @@ public class UserController implements IController<User>{
 	public ResponseEntity<List<User>> getAll() {
 			List<User> users= this.userService.findAll();
 			return new ResponseEntity<>(users, HttpStatus.OK);
+	}
+	
+	@GetMapping("/{numPaginaAtual}")
+	public ResponseEntity<Page<User>> getAll(@PathVariable("numPaginaAtual") int numPaginaAtual) {
+		Page<User> users = this.userService.findAll(numPaginaAtual);
+		return new ResponseEntity<>(users, HttpStatus.OK);
 	}
 
 	@Override

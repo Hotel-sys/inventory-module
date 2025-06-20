@@ -5,6 +5,8 @@ import java.util.List;
 import app.entities.Department;
 import app.repositories.DepartmentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -57,6 +59,12 @@ public class UserService implements IService<User> {
 	public User findById(String id) throws UserNotFoundException {
 		return this.userRepository.findById(id)
 				.orElseThrow(() -> new UserNotFoundException("Usuário com id " + id + " não encontrado."));
+	}
+	
+	public Page<User> findAll(int numPaginaAtual) {
+		int totalPorPagina = 2;
+		PageRequest pageRequest = PageRequest.of(numPaginaAtual - 1, totalPorPagina);
+		return this.userRepository.findAll(pageRequest);
 	}
 
 	@Override
